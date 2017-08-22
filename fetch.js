@@ -1,8 +1,8 @@
-fetch('https://swapi.co/api/people')
+fetch('https://swapi.co/api/peopl')
 .then((response) => {
     console.log(response.status);
     if(response.status !== 200) {
-        throw "Data kunne ikke hentes";
+        throw new Error("Data kunne ikke hentes");
     } else {
         return response.json();
     }
@@ -18,6 +18,9 @@ fetch('https://swapi.co/api/people')
    containerList.innerHTML = '';
    json.results.forEach(function(element) {
         containerList.innerHTML += '<li>' + element.name + '</li>';
+        element.films.forEach(function(films) {
+            containerList.innerHTML += '<a href="'+ films + '">'+ index +'</a>';
+        }, this);
         console.log(json.results.status);
     });
     console.log(json);
@@ -25,3 +28,18 @@ fetch('https://swapi.co/api/people')
     containerName.innerHTML = errorMsg;
     containerList.innerHTML = errorMsg;
 });
+
+//basic fetch layout
+// //fetch(url).then((response) => {
+//     if (response.ok) {
+//         return response.json();
+//       } else {
+//         throw new Error('Something went wrong');
+//       }
+//     })
+//     .then((responseJson) => {
+//       // Do something with the response
+//     })
+//     .catch((error) => {
+//       console.log(error)
+//     });
